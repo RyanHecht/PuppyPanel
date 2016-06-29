@@ -1,0 +1,21 @@
+@charset "utf-8";
+/* CSS Document */
+.header img {
+  float: left;
+  width: 160px;
+  height: 100px;
+  background: #555;
+}
+
+.header h1 {
+  position: relative;
+  top: 18px;
+  left: 10px;
+}
+
+.header p {
+  position: relative;
+  float:right;
+  top: 18px;
+  left: 10px;
+}
