@@ -1,0 +1,2 @@
+Made for my mother's birthday, software for a puppy management kiosk to track when the puppy is fed and taken outside (maybe more down the road).
+Kiosk hardware consists of a Raspberry Pi and a 7" LCD touchscreen
