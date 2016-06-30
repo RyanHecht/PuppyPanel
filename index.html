@@ -9,6 +9,7 @@
 <!-- Bootstrap -->
 <link rel="stylesheet" href="css/bootstrap.css">
 <link rel="stylesheet" href="header.css">
+<link rel="stylesheet" href="css/font-awesome.min.css">
 <link rel="icon" type="image/png" href="bone.jpg">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -21,9 +22,19 @@
 
 
 			<div class="jumbotron">
-    		<h1>Puppy Panel</h1> 
-             <p>Beta v0.1</p>
-			<img src="bone.jpg" class="img-responsive" alt=".." width="160" height="100">
+    			<div class="row" style="text-align:left">
+                    <div class="col-sm-3" >
+                    <h1>Puppy Panel</h1> 
+                    </div>
+                    <div class="col-sm-2" style="text-align:left">
+            		<img src="bone.png" class="img-responsive" width="160" height="100"/>
+                    </div>
+            	</div>
+            	<div class="row">
+                	<div class="col-sm-3">
+                	<p>Beta v0.2</p>
+                    </div>
+                </div>
             </div>
     		
 
@@ -32,20 +43,39 @@
 <div class="container" style="margin-top:20px">
 <div class="row">
 	<div class="col-sm-6">
-    	<button id="feedbutton" class="btn btn-default">
-            	<img src="dogfood.jpg" class="img-circle img-responsive center-block" alt=".." width="320" height="227">
-                <h2 id="feeddate" class="text-center">Wed Jun 29 2016</h2>
-       			 <h2 id="feedtime" class="text-center">12:30:43 PM</h2>
-        </button>
-
+    	
+            <div class="row">
+                <button id="feedbutton" class="btn btn-default center-block">
+                        <img src="dogfood.jpg" class="img-circle img-responsive center-block" alt=".." width="320" height="227">
+                        <h2 id="feeddate" class="text-center">Wed Jun 29 2016</h2>
+                         <h2 id="feedtime" class="text-center">12:30:43 PM</h2>
+                         
+                </button>
+            </div>
+            <div class="row" style="margin-top:20px">
+                <button id="feedundo" class="btn btn-default center-block">
+                         <i class="fa fa-undo" style="color:gray; font-size: 36px;" aria-hidden="true"></i>
+                
+                </button>
+           </div>
+		
     </div>
     <div class="col-sm-6">
-    	<button id="outbutton" class="btn btn-default">
+    	<div class="row">
+    	<button id="outbutton" class="btn btn-default center-block">
         	    	<img src="leash.png" class="img-circle img-responsive center-block" alt=".." width="320" height="227">
                     <h2 id="outdate" class="text-center">Wed Jun 29 2016</h2>
         			<h2 id="outtime" class="text-center">3:30:31 PM</h2>
+                   
         </button>
-
+        </div>
+        <div class="row" style="margin-top:20px">
+        	     <button id="outundo" class="btn btn-default center-block">
+                         <i class="fa fa-undo" style="color:gray; font-size: 36px;" aria-hidden="true"></i>
+                
+                </button>
+        </div>
+		 
     </div>
 </div>
 
