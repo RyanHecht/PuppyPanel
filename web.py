@@ -6,6 +6,9 @@ app = Flask(__name__)
 def out():
     print("idk")
 
+def feed():
+    print("irdk")
+
 if __name__ == "__main__":
     print("Starting Webserver")
     http_server = WSGIServer(('', 80), app)
