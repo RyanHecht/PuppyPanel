@@ -6,6 +6,9 @@ def init():
     c = connection.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS meals
     (id integer primary key, date text NOT NULL, time text NOT NULL, meal text NOT NULL)''')
+
+    c.execute('''CREATE TABLE IF NOT EXISTS out
+    (id integer primary key, date text NOT NULL, time text NOT NULL, type text)''')
     connection.commit()
     connection.close()
 

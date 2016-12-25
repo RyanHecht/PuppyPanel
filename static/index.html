@@ -7,10 +7,10 @@
 <title>Puppy Panel v0.1</title>
 
 <!-- Bootstrap -->
-<link rel="stylesheet" href="css/bootstrap.css">
-<link rel="stylesheet" href="header.css">
-<link rel="stylesheet" href="css/font-awesome.min.css">
-<link rel="icon" type="image/png" href="bone.jpg">
+<link rel="stylesheet" href="res/bootstrap.css">
+<link rel="stylesheet" href="res/header.css">
+<link rel="stylesheet" href="res/font-awesome.min.css">
+<link rel="icon" type="image/png" href="res/bone.jpg">
 <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
 <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
 <!--[if lt IE 9]>
@@ -27,7 +27,7 @@
                     <h1>Puppy Panel</h1>
                     </div>
                     <div class="col-sm-2" style="text-align:left">
-            		<img src="bone.png" class="img-responsive" width="160" height="100"/>
+            		<img src="res/bone.png" class="img-responsive" width="160" height="100"/>
                     </div>
             	</div>
             	<div class="row">
@@ -46,7 +46,7 @@
 
             <div class="row">
                 <button id="feedbutton" class="btn btn-default center-block">
-                        <img src="dogfood.jpg" class="img-circle img-responsive center-block" alt=".." width="320" height="227">
+                        <img src="res/dogfood.jpg" class="img-circle img-responsive center-block" alt=".." width="320" height="227">
                         <h2 id="feeddate" class="text-center">Wed Jun 29 2016</h2>
                          <h2 id="feedtime" class="text-center">12:30:43 PM</h2>
 
@@ -54,7 +54,7 @@
             </div>
             <div class="row" style="margin-top:20px">
                 <button id="feedundo" class="btn btn-default center-block">
-                         <i class="fa fa-undo" style="color:gray; font-size: 36px;" aria-hidden="true"></i>
+                         <img src="res/undo.png" class="img-circle img-responsive center-block" width="30"/>
 
                 </button>
            </div>
@@ -63,7 +63,7 @@
     <div class="col-sm-6">
     	<div class="row">
     	<button id="outbutton" class="btn btn-default center-block">
-        	    	<img src="leash.png" class="img-circle img-responsive center-block" alt=".." width="320" height="227">
+        	    	<img src="res/leash.png" class="img-circle img-responsive center-block" alt=".." width="320" height="227">
                     <h2 id="outdate" class="text-center">Wed Jun 29 2016</h2>
         			<h2 id="outtime" class="text-center">3:30:31 PM</h2>
 
@@ -71,7 +71,7 @@
         </div>
         <div class="row" style="margin-top:20px">
         	     <button id="outundo" class="btn btn-default center-block">
-                         <i class="fa fa-undo" style="color:gray; font-size: 36px;" aria-hidden="true"></i>
+                         <img src="res/undo.png" class="img-circle img-responsive center-block" width="30"/>
 
                 </button>
         </div>
@@ -80,24 +80,41 @@
 </div>
 
 </div>
-<script src="js/jquery.js"></script>
+<script src="res/jquery.js"></script>
 <!-- Include all compiled plugins (below), or include individual files as needed -->
-<script src="js/bootstrap.js"></script>
+<script src="res/bootstrap.js"></script>
 
 <script>
 
 
 $('#feedbutton').on('click', function (e) {
+	date = getDate();
+	time = getTime();
 
+	$.ajax({
+    url: "http://localhost/feed",
+    data: {"date": date,"time": time},
+    success: function(response) {},
+    error: function(xhr) {}
+	});
 
-	document.getElementById("feeddate").innerHTML=getDate();
-	document.getElementById("feedtime").innerHTML=getTime();
+	document.getElementById("feeddate").innerHTML= date;
+	document.getElementById("feedtime").innerHTML= time;
 })
 
 $('#outbutton').on('click', function (e) {
+		date = getDate();
+		time = getTime();
 
-		document.getElementById("outdate").innerHTML=getDate();
-		document.getElementById("outtime").innerHTML=getTime();
+		$.ajax({
+	    url: "http://localhost/feed",
+	    data: {"date": date,"time": time},
+	    success: function(response) {},
+	    error: function(xhr) {}
+		});
+
+		document.getElementById("outdate").innerHTML= date;
+		document.getElementById("outtime").innerHTML= time;
 
 })
 
