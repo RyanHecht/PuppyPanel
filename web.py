@@ -32,6 +32,13 @@ def undo(action):
     elif action == "out":
         return jsonify(db.undo_out())
 
+@app.route("/get/<action>")
+def get(action):
+    if action == "meal":
+        return jsonify(db.get_meal())
+    elif action == "out":
+        return jsonify(db.get_out())
+
 if __name__ == "__main__":
     print("Starting Webserver")
     db.init()

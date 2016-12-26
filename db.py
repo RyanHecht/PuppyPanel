@@ -41,7 +41,7 @@ def undo_meal():
     connection.commit()
     connection.close()
     return new_meal
-    
+
 def undo_out():
     connection = sqlite3.connect('database.db')
     c = connection.cursor()
@@ -56,3 +56,25 @@ def undo_out():
     connection.commit()
     connection.close()
     return new_out
+
+def get_meal():
+    connection = sqlite3.connect('database.db')
+    c = connection.cursor()
+    c.execute('''SELECT * FROM meals
+    ORDER BY id DESC
+    LIMIT 1''')
+    meal = c.fetchone()
+    connection.commit()
+    connection.close()
+    return meal
+
+def get_out():
+    connection = sqlite3.connect('database.db')
+    c = connection.cursor()
+    c.execute('''SELECT * FROM out
+    ORDER BY id DESC
+    LIMIT 1''')
+    out = c.fetchone()
+    connection.commit()
+    connection.close()
+    return out

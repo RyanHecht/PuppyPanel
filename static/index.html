@@ -85,7 +85,8 @@
 <script src="res/bootstrap.js"></script>
 
 <script>
-
+initOut()
+initMeal()
 
 $('#feedbutton').on('click', function (e) {
 	date = getDate();
@@ -155,6 +156,34 @@ function getDate() {
 function getTime() {
 		var date = new Date();
 		return date.toLocaleTimeString();
+}
+
+function initMeal() {
+	$.ajax({
+		url: "http://localhost/get/meal",
+		success: function(response) {
+			console.log(response)
+			date = response[1]
+			time = response[2]
+			document.getElementById("feeddate").innerHTML= date;
+			document.getElementById("feedtime").innerHTML= time;
+		},
+		error: function(xhr) {}
+	});
+}
+
+function initOut() {
+	$.ajax({
+		url: "http://localhost/get/out",
+		success: function(response) {
+			console.log(response)
+			date = response[1]
+			time = response[2]
+			document.getElementById("outdate").innerHTML= date;
+			document.getElementById("outtime").innerHTML= time;
+		},
+		error: function(xhr) {}
+	});
 }
 
 </script>
