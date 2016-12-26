@@ -1,8 +1,8 @@
-import sqllite3
+import sqlite3
 import datetime
 
 def init():
-    connection = sqllite3.connect('database.db')
+    connection = sqlite3.connect('database.db')
     c = connection.cursor()
     c.execute('''CREATE TABLE IF NOT EXISTS meals
     (id integer primary key, date text NOT NULL, time text NOT NULL, meal text NOT NULL)''')
@@ -13,10 +13,19 @@ def init():
     connection.close()
 
 def add_meal(date, time, meal):
-    return "does things"
+    connection = sqlite3.connect('database.db')
+    c = connection.cursor()
+    c.execute('''INSERT INTO meals(date,time,meal) VALUES (?,?,?)''', (date, time, meal))
+    connection.commit()
+    connection.close()
+
 
 def go_out(date, time):
-    return "does things"
+    connection = sqlite3.connect('database.db')
+    c = connection.cursor()
+    c.execute('''INSERT INTO out(date,time) VALUES (?,?)''', (date, time))
+    connection.commit()
+    connection.close()
 
 def undo_meal():
     return "does things"

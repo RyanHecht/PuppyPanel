@@ -1,5 +1,6 @@
 from flask import Flask, current_app, request
 from gevent.wsgi import WSGIServer
+import db
 app = Flask(__name__)
 
 @app.route("/dashboard")
@@ -14,13 +15,13 @@ def res(file_name):
 def out():
     date = request.args.get('date')
     time = request.args.get('time')
-    return "good"
+    db.go_out(date,time)
 
 @app.route("/feed", methods=['GET'])
 def feed():
     date = request.args.get('date')
     time = request.args.get('time')
-    return "good"
+    db.add_meal(date, time, "meal")
 
 @app.route("/undo/<action>")
 def undo(action):
@@ -28,5 +29,6 @@ def undo(action):
 
 if __name__ == "__main__":
     print("Starting Webserver")
+    db.init()
     http_server = WSGIServer(('', 80), app)
     http_server.serve_forever()
