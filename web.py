@@ -25,12 +25,22 @@ def feed():
     db.add_meal(date, time, "meal")
     return "fed"
 
+@app.route("/pill", methods=['GET'])
+def pill():
+    date = request.args.get('date')
+    time = request.args.get('time')
+    stamp = request.args.get('stamp')
+    db.add_pill(date, time, stamp)
+    return "pilled"
+
 @app.route("/undo/<action>")
 def undo(action):
     if action == "meal":
         return jsonify(db.undo_meal())
     elif action == "out":
         return jsonify(db.undo_out())
+    elif action == "pill":
+        return jsonify(db.undo_pill())
 
 @app.route("/get/<action>")
 def get(action):
@@ -38,6 +48,8 @@ def get(action):
         return jsonify(db.get_meal())
     elif action == "out":
         return jsonify(db.get_out())
+    elif action == "pill":
+        return jsonify(db.get_pill())
 
 if __name__ == "__main__":
     print("Starting Webserver")

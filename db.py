@@ -10,6 +10,11 @@ def init():
     c.execute('''CREATE TABLE IF NOT EXISTS out
     (id integer primary key, date text NOT NULL, time text NOT NULL, type text)''')
     connection.commit()
+
+    c.execute('''CREATE TABLE IF NOT EXISTS pill
+    (id integer primary key, date text NOT NULL, time text NOT NULL, stamp text NOT NULL)''')
+
+    connection.commit()
     connection.close()
 
 def add_meal(date, time, meal):
@@ -24,6 +29,13 @@ def go_out(date, time):
     connection = sqlite3.connect('database.db')
     c = connection.cursor()
     c.execute('''INSERT INTO out(date,time) VALUES (?,?)''', (date, time))
+    connection.commit()
+    connection.close()
+
+def add_pill(date, time, stamp):
+    connection = sqlite3.connect('database.db')
+    c = connection.cursor()
+    c.execute('''INSERT INTO pill(date,time,stamp) VALUES (?,?,?)''', (date, time, stamp))
     connection.commit()
     connection.close()
 
@@ -57,6 +69,21 @@ def undo_out():
     connection.close()
     return new_out
 
+def undo_pill():
+    connection = sqlite3.connect('database.db')
+    c = connection.cursor()
+    c.execute('''DELETE FROM pill
+    ORDER BY id DESC
+    LIMIT 1''')
+
+    c.execute('''SELECT * FROM pill
+    ORDER BY id DESC
+    LIMIT 1''')
+    new_pill = c.fetchone()
+    connection.commit()
+    connection.close()
+    return new_pill
+
 def get_meal():
     connection = sqlite3.connect('database.db')
     c = connection.cursor()
@@ -78,3 +105,14 @@ def get_out():
     connection.commit()
     connection.close()
     return out
+
+def get_pill():
+    connection = sqlite3.connect('database.db')
+    c = connection.cursor()
+    c.execute('''SELECT * FROM pill
+    ORDER BY id DESC
+    LIMIT 1''')
+    pill = c.fetchone()
+    connection.commit()
+    connection.close()
+    return pill

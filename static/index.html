@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Puppy Panel v0.1</title>
+<title>Puppy Panel v1.0</title>
 
 <!-- Bootstrap -->
 <link rel="stylesheet" href="res/bootstrap.css">
@@ -32,7 +32,7 @@
             	</div>
             	<div class="row">
                 	<div class="col-sm-3">
-                	<p>Beta v0.2</p>
+                	<p>v1.0</p>
                     </div>
                 </div>
             </div>
@@ -60,7 +60,7 @@
            </div>
 
     </div>
-    <div class="col-sm-6">
+    <div class="col-sm-5">
     	<div class="row">
     	<button id="outbutton" class="btn btn-default center-block">
         	    	<img src="res/leash.png" class="img-circle img-responsive center-block" alt=".." width="320" height="227">
@@ -77,6 +77,23 @@
         </div>
 
     </div>
+		<div class="col-sm-1">
+			<div class="row">
+			<button id="pillbutton" class="btn btn-default center-block">
+								<img src="res/pill.png" class="img-responsive center-block" alt=".." width="50%" height="50%">
+										<h2 id="pilldate" class="text-center">Wed Jun 29 2016</h2>
+							<h2 id="pilltime" class="text-center">3:30:31 PM</h2>
+
+				</button>
+				</div>
+				<div class="row" style="margin-top:20px">
+							 <button id="pillundo" class="btn btn-default center-block">
+												 <img src="res/undo.png" class="img-circle img-responsive center-block" width="30"/>
+
+								</button>
+				</div>
+
+		</div>
 </div>
 
 </div>
@@ -87,6 +104,7 @@
 <script>
 initOut()
 initMeal()
+initPill()
 
 $('#feedbutton').on('click', function (e) {
 	date = getDate();
@@ -119,6 +137,22 @@ $('#outbutton').on('click', function (e) {
 
 })
 
+$('#pillbutton').on('click', function (e) {
+		date = getDate();
+		time = getTime();
+		now = new Date()
+		$.ajax({
+	    url: "http://localhost/pill",
+	    data: {"date": date,"time": time,"stamp": now},
+	    success: function(response) {},
+	    error: function(xhr) {}
+		});
+
+		document.getElementById("pilldate").innerHTML= date;
+		document.getElementById("pilltime").innerHTML= time;
+		initPill()
+})
+
 $('#feedundo').on('click', function (e) {
 	console.log('undo')
 	$.ajax({
@@ -143,6 +177,21 @@ $('#outundo').on('click', function (e) {
 			time = response[2]
 			document.getElementById("outdate").innerHTML= date;
 			document.getElementById("outtime").innerHTML= time;
+		},
+		error: function(xhr) {}
+	});
+})
+
+$('#pillundo').on('click', function (e) {
+	$.ajax({
+		url: "http://localhost/undo/pill",
+		success: function(response) {
+			console.log(response)
+			date = response[1]
+			time = response[2]
+			document.getElementById("pilldate").innerHTML= date;
+			document.getElementById("pilltime").innerHTML= time;
+			initPill()
 		},
 		error: function(xhr) {}
 	});
@@ -181,6 +230,30 @@ function initOut() {
 			time = response[2]
 			document.getElementById("outdate").innerHTML= date;
 			document.getElementById("outtime").innerHTML= time;
+		},
+		error: function(xhr) {}
+	});
+}
+
+function initPill() {
+	$.ajax({
+		url: "http://localhost/get/pill",
+		success: function(response) {
+			console.log(response)
+			date = response[1]
+			time = response[2]
+			stamp = response[3]
+			now = new Date()
+			document.getElementById("pilldate").innerHTML= date;
+			document.getElementById("pilltime").innerHTML= time;
+			if((now - parseInt(stamp)) >= 2505600000) {
+				document.getElementById("pillbutton").classList.remove("btn-default")
+				document.getElementById("pillbutton").classList.add("btn-danger")
+			}
+			else {
+				document.getElementById("pillbutton").classList.remove("btn-danger")
+				document.getElementById("pillbutton").classList.add("btn-default")
+			}
 		},
 		error: function(xhr) {}
 	});
