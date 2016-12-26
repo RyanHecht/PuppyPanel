@@ -28,7 +28,31 @@ def go_out(date, time):
     connection.close()
 
 def undo_meal():
-    return "does things"
+    connection = sqlite3.connect('database.db')
+    c = connection.cursor()
+    c.execute('''DELETE FROM meals
+    ORDER BY id DESC
+    LIMIT 1''')
 
+    c.execute('''SELECT * FROM meals
+    ORDER BY id DESC
+    LIMIT 1''')
+    new_meal = c.fetchone()
+    connection.commit()
+    connection.close()
+    return new_meal
+    
 def undo_out():
-    return "does things"
+    connection = sqlite3.connect('database.db')
+    c = connection.cursor()
+    c.execute('''DELETE FROM out
+    ORDER BY id DESC
+    LIMIT 1''')
+
+    c.execute('''SELECT * FROM out
+    ORDER BY id DESC
+    LIMIT 1''')
+    new_out = c.fetchone()
+    connection.commit()
+    connection.close()
+    return new_out

@@ -107,7 +107,7 @@ $('#outbutton').on('click', function (e) {
 		time = getTime();
 
 		$.ajax({
-	    url: "http://localhost/feed",
+	    url: "http://localhost/out",
 	    data: {"date": date,"time": time},
 	    success: function(response) {},
 	    error: function(xhr) {}
@@ -118,6 +118,34 @@ $('#outbutton').on('click', function (e) {
 
 })
 
+$('#feedundo').on('click', function (e) {
+	console.log('undo')
+	$.ajax({
+		url: "http://localhost/undo/meal",
+		success: function(response) {
+			console.log(response)
+			date = response[1]
+			time = response[2]
+			document.getElementById("feeddate").innerHTML= date;
+			document.getElementById("feedtime").innerHTML= time;
+		},
+		error: function(xhr) {}
+	});
+})
+
+$('#outundo').on('click', function (e) {
+	$.ajax({
+		url: "http://localhost/undo/out",
+		success: function(response) {
+			console.log(response)
+			date = response[1]
+			time = response[2]
+			document.getElementById("outdate").innerHTML= date;
+			document.getElementById("outtime").innerHTML= time;
+		},
+		error: function(xhr) {}
+	});
+})
 
 function getDate() {
 		var date = new Date();

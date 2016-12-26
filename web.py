@@ -1,4 +1,4 @@
-from flask import Flask, current_app, request
+from flask import Flask, current_app, request, jsonify
 from gevent.wsgi import WSGIServer
 import db
 app = Flask(__name__)
@@ -16,16 +16,21 @@ def out():
     date = request.args.get('date')
     time = request.args.get('time')
     db.go_out(date,time)
+    return "out"
 
 @app.route("/feed", methods=['GET'])
 def feed():
     date = request.args.get('date')
     time = request.args.get('time')
     db.add_meal(date, time, "meal")
+    return "fed"
 
 @app.route("/undo/<action>")
 def undo(action):
-    return "undo"
+    if action == "meal":
+        return jsonify(db.undo_meal())
+    elif action == "out":
+        return jsonify(db.undo_out())
 
 if __name__ == "__main__":
     print("Starting Webserver")
