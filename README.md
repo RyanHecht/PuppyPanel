@@ -1,7 +1,7 @@
 # PuppyPanel
 ###### A kiosk management panel for dog owners
 
-![PuppyPanel setup](https://lh4.googleusercontent.com/VBirA5FJOxCMKHfiF-4yhnZvj4Eeh12JtdzTufrr1ZA_6xhepq7Jv9X4VxQpOY0VrysFdZD-Bk5zOggO5_oy8w=w3000-h1742-rw)
+![PuppyPanel setup](http://i.imgur.com/RJS3MYP.jpg)
 
 ## Overview
 
